@@ -83,9 +83,6 @@
 }
 
 /* Custom styles */
-body {
-  overflow: hidden;
-}
 
 /* Text reveal animation */
 .animate-text-reveal {
@@ -160,23 +157,308 @@ body {
   }
 }
 
-/* Camera lens animation */
-@keyframes lens-open {
+/* Professional Camera Lens Animations */
+
+/* Main entrance animation */
+@keyframes lens-entrance {
+  0% {
+    transform: scale(0.3) rotate(-180deg);
+    opacity: 0;
+    filter: blur(10px);
+  }
+  30% {
+    opacity: 0.7;
+    filter: blur(5px);
+  }
+  60% {
+    transform: scale(1.1) rotate(-45deg);
+    filter: blur(1px);
+  }
+  80% {
+    transform: scale(0.95) rotate(0deg);
+    filter: blur(0px);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+/* Barrel rotation effect */
+@keyframes barrel-rotate {
+  0% {
+    transform: rotate(0deg) scale(0.8);
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1);
+    box-shadow: 0 0 40px rgba(255,255,255,0.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+  }
+}
+
+/* Aperture blade animation */
+@keyframes aperture-blade {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg) scale(0);
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+/* Individual blade expansion */
+@keyframes blade-expand {
+  0% {
+    transform: translateX(-50%) scale(0) rotate(45deg);
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(-50%) scale(1) rotate(0deg);
+    opacity: 0.8;
+  }
+}
+
+/* Aperture opening effect */
+@keyframes aperture-open {
   0% {
     transform: scale(0);
     opacity: 0;
+    background: #000;
   }
-  20% {
-    opacity: 0.8;
+  30% {
+    background: #111;
+  }
+  60% {
+    transform: scale(1.3);
+    background: #000;
+  }
+  80% {
+    transform: scale(0.9);
   }
   100% {
     transform: scale(1);
     opacity: 1;
+    background: #000;
   }
 }
 
-.animate-lens-open {
-  animation: lens-open 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+/* Light ray effects */
+@keyframes light-ray {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+/* Center glow effect */
+@keyframes center-glow {
+  0%, 60% {
+    transform: scale(0);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(255,255,255,0);
+  }
+  80% {
+    transform: scale(1.5);
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(255,255,255,0.6);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+    box-shadow: 0 0 10px rgba(255,255,255,0.4);
+  }
+}
+
+/* Reflection animations */
+@keyframes reflection-1 {
+  0%, 40% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  70% {
+    opacity: 0.3;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+}
+
+@keyframes reflection-2 {
+  0%, 50% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  80% {
+    opacity: 0.2;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.05;
+    transform: scale(1);
+  }
+}
+
+/* Markings appearance */
+@keyframes markings-appear {
+  0%, 70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Focus ring animation */
+@keyframes focus-ring {
+  0% {
+    transform: scale(0.8) rotate(-90deg);
+    opacity: 0;
+    border-color: rgba(255,255,255,0);
+  }
+  60% {
+    opacity: 0.6;
+    border-color: rgba(255,255,255,0.3);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.2;
+    border-color: rgba(255,255,255,0.2);
+  }
+}
+
+/* Loading dots */
+@keyframes dots-appear {
+  0%, 80% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dot-pulse {
+  0%, 40% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+}
+
+/* Screen fade out */
+@keyframes screen-fade-out {
+  0%, 92% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Animation classes */
+.animate-lens-entrance {
+  animation: lens-entrance 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.animate-barrel-rotate {
+  animation: barrel-rotate 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both 0.2s;
+}
+
+.animate-aperture-blade {
+  animation: aperture-blade 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.animate-blade-expand {
+  animation: blade-expand 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.animate-aperture-open {
+  animation: aperture-open 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both 1s;
+}
+
+.animate-light-ray {
+  animation: light-ray 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.animate-center-glow {
+  animation: center-glow 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both 1.5s;
+}
+
+.animate-reflection-1 {
+  animation: reflection-1 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both 0.8s;
+}
+
+.animate-reflection-2 {
+  animation: reflection-2 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both 1s;
+}
+
+.animate-markings-appear {
+  animation: markings-appear 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both 0.5s;
+}
+
+.animate-focus-ring {
+  animation: focus-ring 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both 0.3s;
+}
+
+.animate-dots-appear {
+  animation: dots-appear 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.animate-dot-pulse {
+  animation: dot-pulse 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.animate-screen-fade-out {
+  animation: screen-fade-out 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Hardware acceleration */
+.animate-lens-entrance,
+.animate-barrel-rotate,
+.animate-aperture-blade,
+.animate-blade-expand,
+.animate-aperture-open,
+.animate-light-ray,
+.animate-center-glow,
+.animate-reflection-1,
+.animate-reflection-2,
+.animate-markings-appear,
+.animate-focus-ring,
+.animate-dots-appear,
+.animate-dot-pulse,
+.animate-screen-fade-out {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 
 /* Gentle float animation */
@@ -312,4 +594,28 @@ body {
 
 .modal-appear {
   animation: modal-appear 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom gradient utilities for camera lens */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+.border-gradient-to-br {
+  border-image: linear-gradient(to bottom right, var(--tw-gradient-stops)) 1;
+}
+
+/* Hardware acceleration for smooth animations */
+.animate-lens-open,
+.animate-lens-zoom-out,
+.animate-aperture-open,
+.animate-aperture-expand,
+.animate-blade-rotate,
+.animate-light-burst,
+.animate-lens-glint,
+.animate-loading-fade-out,
+.animate-text-fade-in {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }

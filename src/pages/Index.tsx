@@ -22,10 +22,10 @@ const Index = () => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    // Camera lens animation timing
+    // Professional camera lens animation timing - cinematic experience
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2200);
+    }, 2500); // Perfect timing for the professional lens animation
 
     return () => clearTimeout(timer);
   }, []);
