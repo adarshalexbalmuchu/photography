@@ -1,49 +1,25 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import ImageModal from './ImageModal';
-import { supabase } from '@/integrations/supabase/client';
+import { getImagesByCategory, PortfolioImage } from '../data/images';
 
 interface GalleryProps {
   category: 'wildlife' | 'portraits';
 }
 
-interface PortfolioImage {
-  id: string;
-  title: string;
-  caption: string | null;
-  category: string;
-  image_url: string;
-  created_at: string;
-}
-
 const Gallery: React.FC<GalleryProps> = ({ category }) => {
-  const [selectedImage, setSelectedImage] = useState<any>(null);
+  const [selectedImage, setSelectedImage] = useState<PortfolioImage | null>(null);
   const [visibleImages, setVisibleImages] = useState<Set<number>>(new Set());
   const [images, setImages] = useState<PortfolioImage[]>([]);
-  const [loading, setLoading] = useState(true);
   const galleryRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetchImages();
+    // Load images from local data based on category
+    const categoryImages = getImagesByCategory(category);
+    setImages(categoryImages);
+    setVisibleImages(new Set());
   }, [category]);
 
-  const fetchImages = async () => {
-    setLoading(true);
-    const { data, error } = await supabase
-      .from('portfolio_images')
-      .select('*')
-      .eq('category', category)
-      .order('created_at', { ascending: false });
-
-    if (!error && data) {
-      setImages(data);
-    }
-    setLoading(false);
-  };
-
   useEffect(() => {
-    setVisibleImages(new Set());
-    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -53,69 +29,76 @@ const Gallery: React.FC<GalleryProps> = ({ category }) => {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '50px' }
+      {
+        threshold: 0.1,
+        rootMargin: '50px',
+      }
     );
 
-    const imageElements = galleryRef.current?.querySelectorAll('[data-index]');
+    const imageElements = galleryRef.current?.querySelectorAll('.gallery-image');
     imageElements?.forEach(el => observer.observe(el));
 
     return () => observer.disconnect();
   }, [images]);
 
-  if (loading) {
-    return (
-      <div className="max-w-7xl mx-auto px-8 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[...Array(6)].map((_, index) => (
-            <div key={index} className="aspect-[4/5] bg-gray-800 rounded-sm animate-pulse" />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="max-w-7xl mx-auto px-8 py-20" data-section="gallery" ref={galleryRef}>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {images.map((image, index) => (
-          <div
-            key={image.id}
-            data-index={index}
-            className={`group cursor-pointer overflow-hidden transition-all duration-700 ease-out ${
-              visibleImages.has(index) 
-                ? 'opacity-100 translate-y-0 scale-100' 
-                : 'opacity-0 translate-y-8 scale-95'
-            }`}
-            style={{
-              transitionDelay: `${index * 100}ms`,
-            }}
-            onClick={() => setSelectedImage({
-              src: image.image_url,
-              title: image.title,
-              location: image.caption || ''
-            })}
-            data-cursor="view"
-          >
-            <div className="relative aspect-[4/5] overflow-hidden bg-gray-900 rounded-sm">
-              <img
-                src={image.image_url}
-                alt={image.title}
-                className="w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-110"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-500">
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                  <h3 className="text-xl font-light mb-1" style={{ fontFamily: 'Playfair Display, serif' }}>
-                    {image.title}
-                  </h3>
-                  {image.caption && (
-                    <p className="text-sm text-gray-300 tracking-wide">{image.caption}</p>
-                  )}
+    <section className="py-20" ref={galleryRef}>
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-light mb-6 animate-text-reveal">
+            {category === 'wildlife' ? 'Wildlife Collection' : 'Portrait Collection'}
+          </h2>
+          <div className="w-24 h-0.5 bg-white mx-auto opacity-30"></div>
+        </div>
+
+        {images.length === 0 ? (
+          <div className="text-center py-16">
+            <p className="text-gray-400 text-lg">
+              No images available for {category}. 
+              <br />
+              Add images to <code className="bg-gray-800 px-2 py-1 rounded">public/images/{category}/</code> 
+              <br />
+              and update <code className="bg-gray-800 px-2 py-1 rounded">src/data/images.ts</code>
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {images.map((image, index) => (
+              <div
+                key={image.id}
+                data-index={index}
+                className={`gallery-image group cursor-pointer transition-all duration-700 ${
+                  visibleImages.has(index) 
+                    ? 'opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-8'
+                }`}
+                onClick={() => setSelectedImage(image)}
+              >
+                <div className="relative overflow-hidden rounded-lg bg-gray-900 aspect-[4/5]">
+                  <img
+                    src={image.imageUrl}
+                    alt={image.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                    onError={(e) => {
+                      // Fallback to placeholder if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.src = '/placeholder.svg';
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300">
+                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                      <h3 className="text-xl font-light mb-2">{image.title}</h3>
+                      {image.caption && (
+                        <p className="text-sm text-gray-300">{image.caption}</p>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
+        )}
       </div>
 
       {selectedImage && (
@@ -124,7 +107,7 @@ const Gallery: React.FC<GalleryProps> = ({ category }) => {
           onClose={() => setSelectedImage(null)}
         />
       )}
-    </div>
+    </section>
   );
 };
 

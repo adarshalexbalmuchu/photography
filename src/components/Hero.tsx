@@ -54,31 +54,6 @@ const Hero = () => {
         >
           Where wilderness meets humanity
         </p>
-
-        <button 
-          onClick={scrollToGallery}
-          className={`group relative px-8 py-4 bg-transparent border border-white text-white hover:bg-white hover:text-black transition-all duration-500 tracking-widest font-light text-sm overflow-hidden btn-hover animate-button-glow ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
-          }`}
-          style={{ 
-            transitionDelay: '1.2s',
-            animationDelay: '1.2s'
-          }}
-          data-cursor="explore"
-        >
-          <span className="relative z-10">VIEW WORK</span>
-        </button>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-1000 delay-1500 animate-gentle-float ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}>
-        <div className="flex flex-col items-center">
-          <div className="w-px h-12 bg-white opacity-60 relative overflow-hidden">
-            <div className="w-full h-3 bg-amber-400 absolute top-0 animate-bounce"></div>
-          </div>
-        </div>
       </div>
     </section>
   );

@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Optional: Uncomment to ignore uploaded images (if you want them in git, keep commented)
+# public/images/wildlife/*
+# public/images/portraits/*
+# !public/images/**/.gitkeep
