@@ -4,19 +4,34 @@ import React, { useEffect, useState } from 'react';
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [cursorText, setCursorText] = useState('');
 
   useEffect(() => {
     const updatePosition = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
     };
 
-    const handleMouseEnter = () => setIsHovering(true);
-    const handleMouseLeave = () => setIsHovering(false);
+    const handleMouseEnter = (e: Event) => {
+      setIsHovering(true);
+      const target = e.target as HTMLElement;
+      if (target.dataset.cursor === 'view') {
+        setCursorText('VIEW');
+      } else if (target.dataset.cursor === 'explore') {
+        setCursorText('EXPLORE');
+      } else {
+        setCursorText('');
+      }
+    };
+
+    const handleMouseLeave = () => {
+      setIsHovering(false);
+      setCursorText('');
+    };
 
     window.addEventListener('mousemove', updatePosition);
     
     // Add cursor effects to interactive elements
-    const interactiveElements = document.querySelectorAll('button, a, [data-cursor="hover"]');
+    const interactiveElements = document.querySelectorAll('button, a, [data-cursor]');
     interactiveElements.forEach(el => {
       el.addEventListener('mouseenter', handleMouseEnter);
       el.addEventListener('mouseleave', handleMouseLeave);
@@ -33,25 +48,35 @@ const CustomCursor = () => {
 
   return (
     <>
+      {/* Main cursor dot */}
       <div 
-        className={`fixed w-4 h-4 bg-white rounded-full pointer-events-none z-50 transition-transform duration-100 ${
-          isHovering ? 'scale-150' : 'scale-100'
+        className={`fixed w-2 h-2 bg-white rounded-full pointer-events-none z-50 transition-transform duration-150 ease-out mix-blend-difference ${
+          isHovering ? 'scale-0' : 'scale-100'
         }`}
         style={{
-          left: position.x - 8,
-          top: position.y - 8,
-          transform: `translate3d(0, 0, 0) scale(${isHovering ? 1.5 : 1})`,
+          left: position.x - 4,
+          top: position.y - 4,
         }}
       />
+      
+      {/* Hover cursor */}
       <div 
-        className="fixed w-8 h-8 border border-white rounded-full pointer-events-none z-50 transition-all duration-300"
+        className={`fixed pointer-events-none z-50 transition-all duration-300 ease-out ${
+          isHovering ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+        }`}
         style={{
-          left: position.x - 16,
-          top: position.y - 16,
-          transform: `translate3d(0, 0, 0) scale(${isHovering ? 1.5 : 1})`,
-          opacity: isHovering ? 0.5 : 0.3,
+          left: position.x - 30,
+          top: position.y - 30,
         }}
-      />
+      >
+        <div className="w-15 h-15 border border-white rounded-full flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+          {cursorText && (
+            <span className="text-white text-xs font-medium tracking-wider">
+              {cursorText}
+            </span>
+          )}
+        </div>
+      </div>
     </>
   );
 };

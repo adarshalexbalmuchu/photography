@@ -15,10 +15,10 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading time for dramatic effect
+    // Lens opening loading time
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 1800);
 
     return () => clearTimeout(timer);
   }, []);
@@ -34,7 +34,7 @@ const Index = () => {
       
       <Hero />
       
-      <section className="py-20">
+      <section className="py-24" data-section="gallery">
         <CategoryToggle 
           activeCategory={activeCategory} 
           onCategoryChange={setActiveCategory} 

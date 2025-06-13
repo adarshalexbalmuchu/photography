@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ImageModal from './ImageModal';
 
 interface GalleryProps {
@@ -31,64 +31,118 @@ const wildlifeImages = [
     title: 'Playful Primate',
     location: 'Borneo Rainforest',
   },
+  {
+    id: 5,
+    src: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?ixlib=rb-4.0.3&auto=format&fit=crop&w=3722&q=80',
+    title: 'Ocean Hunter',
+    location: 'Great Barrier Reef',
+  },
+  {
+    id: 6,
+    src: 'https://images.unsplash.com/photo-1551316679-9c6ae9dec224?ixlib=rb-4.0.3&auto=format&fit=crop&w=3540&q=80',
+    title: 'Arctic Explorer',
+    location: 'Arctic Circle, Norway',
+  },
 ];
 
 const portraitImages = [
   {
-    id: 5,
+    id: 7,
     src: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=3057&q=80',
     title: 'Innocence',
     location: 'Studio Session',
   },
   {
-    id: 6,
+    id: 8,
     src: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2976&q=80',
     title: 'Natural Beauty',
     location: 'Golden Hour Portrait',
   },
   {
-    id: 7,
+    id: 9,
     src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2787&q=80',
     title: 'Character Study',
     location: 'Environmental Portrait',
   },
   {
-    id: 8,
+    id: 10,
     src: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2787&q=80',
     title: 'Contemplation',
     location: 'Urban Portrait Series',
+  },
+  {
+    id: 11,
+    src: 'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&auto=format&fit=crop&w=2987&q=80',
+    title: 'Cultural Heritage',
+    location: 'Documentary Series',
+  },
+  {
+    id: 12,
+    src: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=2787&q=80',
+    title: 'Strength',
+    location: 'Athletic Portrait',
   },
 ];
 
 const Gallery: React.FC<GalleryProps> = ({ category }) => {
   const [selectedImage, setSelectedImage] = useState<any>(null);
+  const [visibleImages, setVisibleImages] = useState<Set<number>>(new Set());
+  const galleryRef = useRef<HTMLDivElement>(null);
   
   const images = category === 'wildlife' ? wildlifeImages : portraitImages;
 
+  useEffect(() => {
+    setVisibleImages(new Set());
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-index') || '0');
+            setVisibleImages(prev => new Set([...prev, index]));
+          }
+        });
+      },
+      { threshold: 0.2, rootMargin: '50px' }
+    );
+
+    const imageElements = galleryRef.current?.querySelectorAll('[data-index]');
+    imageElements?.forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [category]);
+
   return (
-    <div className="max-w-7xl mx-auto px-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="max-w-7xl mx-auto px-8 py-16" data-section="gallery" ref={galleryRef}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
         {images.map((image, index) => (
           <div
             key={image.id}
-            className="group cursor-pointer overflow-hidden rounded-lg bg-gray-900"
+            data-index={index}
+            className={`group cursor-pointer overflow-hidden transition-all duration-700 ${
+              visibleImages.has(index) 
+                ? 'opacity-100 translate-y-0 scale-100' 
+                : 'opacity-0 translate-y-8 scale-95'
+            }`}
             style={{
-              animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
+              transitionDelay: `${index * 150}ms`,
             }}
             onClick={() => setSelectedImage(image)}
-            data-cursor="hover"
+            data-cursor="view"
           >
-            <div className="relative aspect-[4/5] overflow-hidden">
+            <div className="relative aspect-[4/5] overflow-hidden bg-gray-900 rounded-sm">
               <img
                 src={image.src}
                 alt={image.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-500">
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                  <h3 className="text-xl font-medium mb-2">{image.title}</h3>
-                  <p className="text-sm text-gray-300">{image.location}</p>
+              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-500">
+                <div className="absolute bottom-0 left-0 right-0 p-8 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                  <h3 className="text-2xl font-light mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
+                    {image.title}
+                  </h3>
+                  <p className="text-sm text-gray-300 tracking-wide">{image.location}</p>
                 </div>
               </div>
             </div>
