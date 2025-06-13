@@ -5,7 +5,7 @@ const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 800);
+    const timer = setTimeout(() => setIsVisible(true), 500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -18,60 +18,65 @@ const Hero = () => {
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background image with subtle parallax */}
+      {/* Background image with parallax */}
       <div 
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-[20s] ease-out"
+        className="absolute inset-0 bg-cover bg-center transition-transform duration-[15s] ease-out"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=3634&q=80')`,
-          transform: isVisible ? 'scale(1.05) translateY(-20px)' : 'scale(1.1) translateY(0px)',
+          transform: isVisible ? 'scale(1.1)' : 'scale(1.15)',
         }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center max-w-4xl px-8">
+      <div className="relative z-10 text-center max-w-5xl px-8">
         <h1 
-          className={`text-7xl md:text-9xl font-light mb-8 transition-all duration-1500 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
-          }`}
-          style={{ fontFamily: 'Playfair Display, serif' }}
+          className={`text-8xl md:text-9xl font-light mb-6 transition-all duration-1500 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+          } animate-text-reveal`}
+          style={{ 
+            fontFamily: 'Playfair Display, serif',
+            animationDelay: '0.3s'
+          }}
         >
-          <span className="block text-white leading-tight">WILDLIFE</span>
-          <span className="block text-amber-400 text-5xl md:text-7xl font-light mt-2">
-            & PORTRAITS
+          <span className="block text-white leading-none">CAPTURED</span>
+          <span className="block text-amber-400 text-6xl md:text-7xl font-light mt-2">
+            MOMENTS
           </span>
         </h1>
         
         <p 
-          className={`text-xl md:text-2xl font-light text-gray-300 mb-16 max-w-2xl mx-auto leading-relaxed transition-all duration-1500 delay-300 ${
+          className={`text-xl md:text-2xl font-light text-gray-200 mb-12 max-w-xl mx-auto leading-relaxed transition-all duration-1500 delay-500 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
-          }`}
+          } animate-text-reveal`}
+          style={{ animationDelay: '0.8s' }}
         >
-          Capturing the raw essence of life through conservation and humanity
+          Where wilderness meets humanity
         </p>
 
         <button 
           onClick={scrollToGallery}
-          className={`group relative px-10 py-4 bg-transparent border border-white text-white hover:bg-white hover:text-black transition-all duration-500 tracking-widest font-light text-lg overflow-hidden ${
+          className={`group relative px-8 py-4 bg-transparent border border-white text-white hover:bg-white hover:text-black transition-all duration-500 tracking-widest font-light text-sm overflow-hidden btn-hover animate-button-glow ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
           }`}
-          style={{ transitionDelay: '600ms' }}
+          style={{ 
+            transitionDelay: '1.2s',
+            animationDelay: '1.2s'
+          }}
           data-cursor="explore"
         >
-          <span className="relative z-10">EXPLORE WORK</span>
-          <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+          <span className="relative z-10">VIEW WORK</span>
         </button>
       </div>
 
-      {/* Refined scroll indicator */}
-      <div className={`absolute bottom-12 left-1/2 transform -translate-x-1/2 transition-all duration-1000 delay-1000 ${
+      {/* Scroll indicator */}
+      <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-1000 delay-1500 animate-gentle-float ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}>
         <div className="flex flex-col items-center">
-          <span className="text-white text-xs tracking-widest mb-4 font-light">SCROLL</span>
-          <div className="w-px h-16 bg-white opacity-50 relative overflow-hidden">
-            <div className="w-full h-4 bg-amber-400 absolute top-0 animate-bounce"></div>
+          <div className="w-px h-12 bg-white opacity-60 relative overflow-hidden">
+            <div className="w-full h-3 bg-amber-400 absolute top-0 animate-bounce"></div>
           </div>
         </div>
       </div>
