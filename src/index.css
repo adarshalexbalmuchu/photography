@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,62 +6,67 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
+
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
+ 
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
+
+    --primary: 222.1 83.2% 9.8%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 210 22.9% 89.8%;
+    --secondary-foreground: 222.2 84% 4.9%;
+ 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
+
     --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent-foreground: 222.2 84% 4.9%;
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
+
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+
+    --ring: 222.1 83.2% 9.8%;
+
     --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
+
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
+ 
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
+
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
+
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
+ 
     --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted-foreground: 215 20.2% 65.9%;
+
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
+
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
+    
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --ring: 224.3 76.3% 48%;
+
+    --radius: 0.5rem;
   }
 }
 
@@ -70,56 +74,210 @@
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', sans-serif;
-    cursor: none;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 400;
-    letter-spacing: -0.02em;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
 }
 
-/* Enhanced Camera Lens Animation */
-@keyframes lensOpen {
+/* Custom styles */
+body {
+  overflow: hidden;
+}
+
+/* Text reveal animation */
+.animate-text-reveal {
+  animation-fill-mode: both;
+  animation-duration: 1.5s;
+  animation-delay: 0.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+  animation-name: text-reveal;
+}
+
+@keyframes text-reveal {
   0% {
-    transform: scale(0) rotate(0deg);
     opacity: 0;
-  }
-  50% {
-    transform: scale(0.5) rotate(180deg);
-    opacity: 0.7;
+    transform: translateY(60px);
   }
   100% {
-    transform: scale(1) rotate(360deg);
-    opacity: 1;
-  }
-}
-
-/* Smooth reveal animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@keyframes staggerFadeIn {
+/* Button hover effect */
+.btn-hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn-hover:hover::before {
+  transform: translateX(100%);
+}
+
+/* Button glow animation */
+.animate-button-glow::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 1rem;
+  margin: -3px;
+  background: linear-gradient(to right, #fde047, #fbbf24, #f59e0b, #d97706);
+  z-index: -1;
+  animation: 2.5s border-glow linear infinite;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.animate-button-glow:hover::after {
+  opacity: 1;
+}
+
+@keyframes border-glow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Camera lens animation */
+@keyframes lens-open {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-lens-open {
+  animation: lens-open 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+/* Gentle float animation */
+@keyframes gentle-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-gentle-float {
+  animation: gentle-float 3s ease-in-out infinite;
+}
+
+/* Scale in animation */
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s ease-in-out forwards;
+}
+
+/* Floating label form */
+.floating-label {
+  position: relative;
+  margin-bottom: 1.5em;
+}
+
+.floating-label input,
+.floating-label textarea {
+  font-size: 1.2em;
+  padding: 0.5em;
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #757575;
+  background-color: transparent;
+  color: white;
+}
+
+.floating-label input:focus,
+.floating-label textarea:focus {
+  outline: none;
+  border-bottom-color: #fcd34d;
+}
+
+.floating-label label {
+  color: #757575;
+  font-size: 1em;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 0.5em;
+  top: 0.5em;
+  transition: 0.2s ease all;
+}
+
+.floating-label input:focus + label,
+.floating-label textarea:focus + label,
+.floating-label input:valid + label,
+.floating-label textarea:valid + label {
+  top: -0.75em;
+  font-size: 0.85em;
+  color: #fcd34d;
+  left: 0;
+}
+
+/* Enhanced gallery animations */
+.image-hover-effect {
+  transform-origin: center;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.image-hover-effect img {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.image-hover-effect:hover img {
+  transform: scale(1.08);
+}
+
+/* Smooth reveal animations */
+@keyframes smooth-reveal {
   from {
     opacity: 0;
-    transform: translateY(40px) scale(0.95);
+    transform: translateY(20px) scale(0.98);
   }
   to {
     opacity: 1;
@@ -127,196 +285,31 @@
   }
 }
 
-@keyframes scaleIn {
+.smooth-reveal {
+  animation: smooth-reveal 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Enhanced overlay animations */
+.image-hover-effect .absolute {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-hover-effect:hover .absolute {
+  backdrop-filter: blur(2px);
+}
+
+/* Admin panel animations */
+@keyframes modal-appear {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.95) translateY(-10px);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(0);
   }
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(60px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes gentleFloat {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes textReveal {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-    filter: blur(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0px);
-  }
-}
-
-@keyframes buttonGlow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
-  }
-}
-
-.animate-lens-open {
-  animation: lensOpen 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
-
-.animate-stagger-fade {
-  animation: staggerFadeIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
-}
-
-.animate-slide-up {
-  animation: slideUp 1s cubic-bezier(0.23, 1, 0.32, 1) both;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.animate-text-reveal {
-  animation: textReveal 1.2s cubic-bezier(0.23, 1, 0.32, 1) both;
-}
-
-.animate-gentle-float {
-  animation: gentleFloat 6s ease-in-out infinite;
-}
-
-.animate-button-glow {
-  animation: buttonGlow 2s ease-in-out infinite;
-}
-
-/* Smooth Transforms */
-* {
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #d4af37;
-  border-radius: 2px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #b8941f;
-}
-
-/* Selection Color */
-::selection {
-  background: #d4af37;
-  color: #000;
-}
-
-/* Focus States */
-button:focus,
-input:focus,
-textarea:focus {
-  outline: 2px solid #d4af37;
-  outline-offset: 2px;
-}
-
-/* Enhanced Floating Labels */
-.floating-label {
-  position: relative;
-}
-
-.floating-label input,
-.floating-label textarea {
-  border: none;
-  border-bottom: 1px solid #333;
-  background: transparent;
-  padding: 1.5rem 0 0.75rem 0;
-  font-size: 1rem;
-  color: white;
-  width: 100%;
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.floating-label input:focus,
-.floating-label textarea:focus {
-  outline: none;
-  border-color: #d4af37;
-  transform: translateY(-2px);
-}
-
-.floating-label label {
-  position: absolute;
-  top: 1rem;
-  left: 0;
-  font-size: 1rem;
-  color: #888;
-  pointer-events: none;
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.floating-label input:focus + label,
-.floating-label input:not(:placeholder-shown) + label,
-.floating-label textarea:focus + label,
-.floating-label textarea:not(:placeholder-shown) + label {
-  top: -0.5rem;
-  font-size: 0.8rem;
-  color: #d4af37;
-  transform: translateY(-5px);
-}
-
-/* Image hover effects */
-.image-hover-effect {
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.image-hover-effect:hover {
-  transform: scale(1.02) translateY(-5px);
-}
-
-/* Button hover effects */
-.btn-hover {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.btn-hover::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-  transition: left 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.btn-hover:hover::before {
-  left: 100%;
+.modal-appear {
+  animation: modal-appear 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }

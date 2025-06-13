@@ -4,15 +4,22 @@ import Hero from '../components/Hero';
 import CategoryToggle from '../components/CategoryToggle';
 import Gallery from '../components/Gallery';
 import About from '../components/About';
-import Contact from '../components/Contact';
-import Footer from '../components/Footer';
+import MinimalFooter from '../components/MinimalFooter';
 import CustomCursor from '../components/CustomCursor';
 import ScrollIndicator from '../components/ScrollIndicator';
 import LoadingScreen from '../components/LoadingScreen';
+import AdminPanel from '../components/AdminPanel';
+import AuthModal from '../components/AuthModal';
+import { supabase } from '@/integrations/supabase/client';
+import { User } from '@supabase/supabase-js';
 
 const Index = () => {
   const [activeCategory, setActiveCategory] = useState<'wildlife' | 'portraits'>('wildlife');
   const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState<User | null>(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showAdminPanel, setShowAdminPanel] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     // Camera lens animation timing
@@ -22,6 +29,58 @@ const Index = () => {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    // Check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    // Check if user is admin
+    if (user) {
+      checkAdminStatus();
+    } else {
+      setIsAdmin(false);
+    }
+  }, [user]);
+
+  const checkAdminStatus = async () => {
+    if (!user) return;
+    
+    const { data } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', user.id)
+      .single();
+    
+    setIsAdmin(data?.role === 'admin');
+  };
+
+  const handleAdminKeyPress = (e: KeyboardEvent) => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+      if (!user) {
+        setShowAuthModal(true);
+      } else if (isAdmin) {
+        setShowAdminPanel(true);
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleAdminKeyPress);
+    return () => window.removeEventListener('keydown', handleAdminKeyPress);
+  }, [user, isAdmin]);
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -43,8 +102,21 @@ const Index = () => {
       </section>
       
       <About />
-      <Contact />
-      <Footer />
+      <MinimalFooter />
+
+      {showAuthModal && (
+        <AuthModal 
+          onClose={() => setShowAuthModal(false)}
+          onSuccess={() => {
+            setShowAuthModal(false);
+            setTimeout(() => checkAdminStatus(), 1000);
+          }}
+        />
+      )}
+
+      {showAdminPanel && isAdmin && (
+        <AdminPanel onClose={() => setShowAdminPanel(false)} />
+      )}
     </div>
   );
 };
