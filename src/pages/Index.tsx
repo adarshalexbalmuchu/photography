@@ -32,16 +32,19 @@ const Index = () => {
       
       <Hero />
       
-      <div className="container mx-auto px-4">
-        <CategoryToggle 
-          activeCategory={activeCategory} 
-          onCategoryChange={setActiveCategory} 
-        />
-        
-        <Gallery category={activeCategory} />
-        
-        <About />
-      </div>
+      {/* Gallery Section with proper spacing */}
+      <section data-section="gallery" className="py-20">
+        <div className="container mx-auto px-4">
+          <CategoryToggle 
+            activeCategory={activeCategory} 
+            onCategoryChange={setActiveCategory} 
+          />
+          
+          <Gallery category={activeCategory} />
+        </div>
+      </section>
+      
+      <About />
       
       <MinimalFooter />
     </div>

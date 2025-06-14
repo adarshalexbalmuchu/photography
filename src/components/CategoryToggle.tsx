@@ -8,8 +8,8 @@ interface CategoryToggleProps {
 
 const CategoryToggle: React.FC<CategoryToggleProps> = ({ activeCategory, onCategoryChange }) => {
   return (
-    <div className="flex justify-center mb-16">
-      <div className="relative bg-gray-900 rounded-full p-2">
+    <div className="flex justify-center mb-20">
+      <div className="relative bg-gray-900 rounded-full p-2 shadow-2xl">
         <div 
           className={`absolute top-2 h-12 bg-yellow-400 rounded-full transition-all duration-500 ease-out ${
             activeCategory === 'wildlife' ? 'left-2 w-32' : 'left-36 w-32'
