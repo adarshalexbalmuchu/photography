@@ -15,26 +15,26 @@ export const portfolioImages: PortfolioImage[] = [
   // Wildlife Images - Mix of landscape and portrait orientations
   {
     id: 'wildlife-1',
-    title: 'Majestic Lion',
-    caption: 'A powerful lion in its natural habitat',
+    title: 'Wildlife Shot',
+    caption: 'Capturing the beauty of nature',
     category: 'wildlife',
-    imageUrl: '/images/wildlife/lion.jpg',
+    imageUrl: '/images/wildlife/DSC_0651.jpeg',
     aspectRatio: '16:9'
   },
   {
     id: 'wildlife-2',
-    title: 'Soaring Eagle',
-    caption: 'An eagle captured in flight',
+    title: 'Nature Portrait',
+    caption: 'A moment in the wild',
     category: 'wildlife',
-    imageUrl: '/images/wildlife/eagle.jpg',
+    imageUrl: '/images/wildlife/DSC_0659.jpeg',
     aspectRatio: '9:16'
   },
   {
     id: 'wildlife-3',
-    title: 'Peaceful Deer',
-    caption: 'A deer grazing in the morning light',
+    title: 'Wildlife Scene',
+    caption: 'The wilderness calls',
     category: 'wildlife',
-    imageUrl: '/images/wildlife/deer.jpg',
+    imageUrl: '/images/wildlife/DSC_0682.jpg',
     aspectRatio: '16:9'
   },
 

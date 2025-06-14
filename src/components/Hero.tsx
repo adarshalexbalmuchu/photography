@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 
 const Hero = () => {
@@ -16,19 +15,14 @@ const Hero = () => {
     }
   };
 
-  return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background image with parallax */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-[15s] ease-out"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=3634&q=80')`,
-          transform: isVisible ? 'scale(1.1)' : 'scale(1.15)',
-        }}
-      >
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-      </div>
+  // Update the hero background image to the new elephant image
+  const heroBackground = "/public/images/wildlife/1722037546362136.JPG";
 
+  return (
+    <section
+      className="relative w-full h-screen flex items-center justify-center bg-cover bg-center"
+      style={{ backgroundImage: `url(${heroBackground})` }}
+    >
       {/* Content */}
       <div className="relative z-10 text-center max-w-5xl px-8">
         <h1 
@@ -54,6 +48,31 @@ const Hero = () => {
         >
           Where wilderness meets humanity
         </p>
+
+        <button 
+          onClick={scrollToGallery}
+          className={`group relative px-8 py-4 bg-transparent border border-white text-white hover:bg-white hover:text-black transition-all duration-500 tracking-widest font-light text-sm overflow-hidden btn-hover animate-button-glow ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
+          }`}
+          style={{ 
+            transitionDelay: '1.2s',
+            animationDelay: '1.2s'
+          }}
+          data-cursor="explore"
+        >
+          <span className="relative z-10">VIEW WORK</span>
+        </button>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-1000 delay-1500 animate-gentle-float ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}>
+        <div className="flex flex-col items-center">
+          <div className="w-px h-12 bg-white opacity-60 relative overflow-hidden">
+            <div className="w-full h-3 bg-amber-400 absolute top-0 animate-bounce"></div>
+          </div>
+        </div>
       </div>
     </section>
   );
