@@ -16,7 +16,7 @@ const Hero = () => {
   };
 
   // Use the new elephant wildlife image as hero background
-const heroBackground = "/images/hero-background.jpg";
+const heroBackground = `${import.meta.env.BASE_URL}images/hero-background.jpg`;
   return (
     <section
       className="relative w-full h-screen flex items-center justify-center bg-cover bg-center"
