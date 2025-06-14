@@ -34,8 +34,11 @@ const Hero = () => {
             animationDelay: '0.3s'
           }}
         >
-          <span className="block text-white leading-none">CAPTURED</span>
-          <span className="block text-amber-400 text-6xl md:text-7xl font-light mt-2">
+          <span className="block text-white leading-none animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+            CAPTURED
+          </span>
+          <span className="block text-amber-400 text-6xl md:text-7xl font-light mt-2 animate-fade-in-up animate-pulse" 
+          style={{ animationDelay: '0.8s' }}>
             MOMENTS
           </span>
         </h1>

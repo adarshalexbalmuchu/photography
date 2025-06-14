@@ -40,7 +40,7 @@ const Index = () => {
             onCategoryChange={setActiveCategory} 
           />
           
-          <Gallery category={activeCategory} />
+          <Gallery activeCategory={activeCategory} />
         </div>
       </section>
       

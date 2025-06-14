@@ -34,47 +34,40 @@ const About = () => {
             
             <div className="space-y-6 text-gray-300 text-lg leading-relaxed">
               <p>
-                For over a decade, I've been capturing the untold stories of wildlife and the human spirit. 
-                My journey began in the remote landscapes of Patagonia, where I discovered the profound 
-                connection between nature and humanity.
+                 A passionate photographer specializing in wildlife and portrait photography. With a camera in hand and an eye for detail, I aim to capture moments that tell powerful stories, from the raw intensity of nature to the subtle depth in human expressions.
               </p>
+
+           <p>
+            Over the years, I’ve spent countless hours in forests, rural landscapes, and urban settings, honing my craft. My wildlife shots focus on the untamed beauty of animals in their natural habitat, while my portraits aim to reveal emotion, character, and authenticity through thoughtful composition and lighting.
+           </p>
               
               <p>
-                Each photograph is a moment of truth—whether it's the piercing gaze of a mountain lion 
-                or the quiet contemplation in a portrait session. I believe in patient observation, 
-                ethical practices, and the power of imagery to inspire conservation and empathy.
-              </p>
-              
-              <p>
-                My work has been featured in National Geographic, Smithsonian Magazine, and numerous 
-                conservation publications. But beyond accolades, I'm driven by the responsibility 
-                to tell stories that matter.
-              </p>
+              My work has connected with over 2.5 lakh+ viewers on Instagram, and I continue to explore new ways to blend art, storytelling, and emotion in every frame. Photography, for me, isn’t just a skill, it’s a way of seeing the world differently and helping others do the same.
+            </p>
             </div>
 
             <div className="mt-12 grid grid-cols-3 gap-8 text-center">
               <div>
-                <div className="text-3xl font-light text-yellow-400 mb-2">12+</div>
+                <div className="text-3xl font-light text-yellow-400 mb-2">6+</div>
                 <div className="text-sm text-gray-400 tracking-wide">YEARS</div>
               </div>
+            
               <div>
-                <div className="text-3xl font-light text-yellow-400 mb-2">50+</div>
-                <div className="text-sm text-gray-400 tracking-wide">COUNTRIES</div>
-              </div>
-              <div>
-                <div className="text-3xl font-light text-yellow-400 mb-2">500K+</div>
-                <div className="text-sm text-gray-400 tracking-wide">IMAGES</div>
+                <div className="text-3xl font-light text-yellow-400 mb-2">200K+</div>
+                <div className="text-sm text-gray-400 tracking-wide">IMPRESSIONS</div>
               </div>
             </div>
           </div>
           
           <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}>
             <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2787&q=80"
-                alt="Photographer portrait"
-                className="w-full rounded-lg shadow-2xl"
-              />
+
+<img
+  src="/images/portraits/About me.jpg"
+  alt="Photographer portrait"
+  className="w-full h-96 object-cover object-[center_60%] rounded-lg shadow-2xl"
+/>
+
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent rounded-lg opacity-60"></div>
             </div>
           </div>
