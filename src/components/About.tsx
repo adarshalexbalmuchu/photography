@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 
 const About = () => {
@@ -63,7 +62,7 @@ const About = () => {
             <div className="relative">
 
 <img
-  src="/images/portraits/About me.jpg"
+  src={`${import.meta.env.BASE_URL}images/portraits/about-me.jpg`}
   alt="Photographer portrait"
   className="w-full h-96 object-cover object-[center_60%] rounded-lg shadow-2xl"
 />
