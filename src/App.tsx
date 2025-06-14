@@ -8,7 +8,7 @@ import NotFound from "./pages/NotFound";
 const App = () => (
   <TooltipProvider>
     <Toaster />
-    <BrowserRouter>
+    <BrowserRouter basename="/photography">
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="*" element={<NotFound />} />
