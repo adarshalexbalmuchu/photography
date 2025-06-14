@@ -12,56 +12,168 @@ export interface PortfolioImage {
 }
 
 export const portfolioImages: PortfolioImage[] = [
-  // Wildlife Images - Mix of landscape and portrait orientations
+  // Wildlife Images - Curated selection for optimal performance
   {
     id: 'wildlife-1',
-    title: 'Wildlife Shot',
-    caption: 'Capturing the beauty of nature',
+    title: 'Wildlife Moment',
+    caption: 'Capturing the essence of nature',
     category: 'wildlife',
-    imageUrl: '/images/wildlife/DSC_0651.jpeg',
-    aspectRatio: '16:9'
+    imageUrl: '/images/wildlife/DSC_1397.jpeg',
+    aspectRatio: '9:16'
   },
   {
     id: 'wildlife-2',
     title: 'Nature Portrait',
     caption: 'A moment in the wild',
     category: 'wildlife',
-    imageUrl: '/images/wildlife/DSC_0659.jpeg',
-    aspectRatio: '9:16'
+    imageUrl: '/images/wildlife/DSC_0651.jpeg',
+    aspectRatio: '16:9'
   },
   {
     id: 'wildlife-3',
     title: 'Wildlife Scene',
     caption: 'The wilderness calls',
     category: 'wildlife',
-    imageUrl: '/images/wildlife/DSC_0682.jpg',
+    imageUrl: '/images/wildlife/DSC_1388.jpg',
     aspectRatio: '16:9'
   },
+  {
+    id: 'wildlife-4',
+    title: 'Natural Beauty',
+    caption: 'Wildlife in action',
+    category: 'wildlife',
+    imageUrl: '/images/wildlife/DSC_1275.jpg',
+    aspectRatio: '9:16'
+  },
+  {
+    id: 'wildlife-5',
+    title: 'Wild Encounter',
+    caption: 'Intimate wildlife moment',
+    category: 'wildlife',
+    imageUrl: '/images/wildlife/DSC_1215.jpg',
+    aspectRatio: '16:9'
+  },
+  {
+    id: 'wildlife-6',
+    title: 'Nature\'s Grace',
+    caption: 'Elegance in the wild',
+    category: 'wildlife',
+    imageUrl: '/images/wildlife/DSC_1190.jpg',
+    aspectRatio: '9:16'
+  },
+  {
+    id: 'wildlife-7',
+    title: 'Wildlife Portrait',
+    caption: 'Character study',
+    category: 'wildlife',
+    imageUrl: '/images/wildlife/DSC_1183.jpg',
+    aspectRatio: '16:9'
+  },
+  {
+    id: 'wildlife-8',
+    title: 'Natural Habitat',
+    caption: 'Life in the wilderness',
+    category: 'wildlife',
+    imageUrl: '/images/wildlife/DSC_1173.jpg',
+    aspectRatio: '9:16'
+  },
+  {
+    id: 'wildlife-9',
+    title: 'Wild Moment',
+    caption: 'Spontaneous wildlife capture',
+    category: 'wildlife',
+    imageUrl: '/images/wildlife/DSC_1166.jpg',
+    aspectRatio: '16:9'
+  },
+  {
+    id: 'wildlife-10',
+    title: 'Nature\'s Drama',
+    caption: 'Dynamic wildlife scene',
+    category: 'wildlife',
+    imageUrl: '/images/wildlife/IMG_9611.JPG',
+    aspectRatio: '9:16'
+  },
 
-  // Portrait Images - Mix of orientations
+  // Portrait Images - Curated selection for optimal performance
   {
     id: 'portrait-1',
-    title: 'Portrait Session 1',
-    caption: 'Professional portrait photography',
+    title: 'Portrait Excellence',
+    caption: 'Professional portrait artistry',
     category: 'portraits',
-    imageUrl: '/images/portraits/portrait1.jpg',
+    imageUrl: '/images/portraits/DSC00891.JPG',
     aspectRatio: '9:16'
   },
   {
     id: 'portrait-2',
-    title: 'Portrait Session 2',
-    caption: 'Capturing natural expressions',
+    title: 'Character Study',
+    caption: 'Capturing personality',
     category: 'portraits',
-    imageUrl: '/images/portraits/portrait2.jpg',
+    imageUrl: '/images/portraits/DSC00902.JPG',
     aspectRatio: '16:9'
   },
   {
     id: 'portrait-3',
-    title: 'Portrait Session 3',
-    caption: 'Studio portrait with dramatic lighting',
+    title: 'Human Expression',
+    caption: 'Emotional portrait',
     category: 'portraits',
-    imageUrl: '/images/portraits/portrait3.jpg',
+    imageUrl: '/images/portraits/DSC01166.JPG',
     aspectRatio: '9:16'
+  },
+  {
+    id: 'portrait-4',
+    title: 'Portrait Art',
+    caption: 'Artistic vision',
+    category: 'portraits',
+    imageUrl: '/images/portraits/DSC01167.JPG',
+    aspectRatio: '16:9'
+  },
+  {
+    id: 'portrait-5',
+    title: 'Professional Shot',
+    caption: 'Studio excellence',
+    category: 'portraits',
+    imageUrl: '/images/portraits/IMG_9560.JPG',
+    aspectRatio: '9:16'
+  },
+  {
+    id: 'portrait-6',
+    title: 'Natural Portrait',
+    caption: 'Authentic expression',
+    category: 'portraits',
+    imageUrl: '/images/portraits/IMG_9561.JPG',
+    aspectRatio: '16:9'
+  },
+  {
+    id: 'portrait-7',
+    title: 'Portrait Story',
+    caption: 'Personal narrative',
+    category: 'portraits',
+    imageUrl: '/images/portraits/IMG_9562.JPG',
+    aspectRatio: '9:16'
+  },
+  {
+    id: 'portrait-8',
+    title: 'Classic Portrait',
+    caption: 'Timeless elegance',
+    category: 'portraits',
+    imageUrl: '/images/portraits/IMG_9565.JPG',
+    aspectRatio: '16:9'
+  },
+  {
+    id: 'portrait-9',
+    title: 'Contemporary Art',
+    caption: 'Modern portrait style',
+    category: 'portraits',
+    imageUrl: '/images/portraits/IMG_9567.JPG',
+    aspectRatio: '9:16'
+  },
+  {
+    id: 'portrait-10',
+    title: 'Portrait Session',
+    caption: 'Professional photography',
+    category: 'portraits',
+    imageUrl: '/images/portraits/Snapseed.jpg',
+    aspectRatio: '16:9'
   }
 ];
 

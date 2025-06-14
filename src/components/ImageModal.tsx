@@ -4,10 +4,11 @@ import { PortfolioImage } from '../data/images';
 
 interface ImageModalProps {
   image: PortfolioImage;
+  isOpen: boolean;
   onClose: () => void;
 }
 
-const ImageModal: React.FC<ImageModalProps> = ({ image, onClose }) => {
+const ImageModal: React.FC<ImageModalProps> = ({ image, isOpen, onClose }) => {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();

@@ -13,10 +13,10 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Professional camera lens animation timing - cinematic experience
+    // Fast loading for better user experience
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2500); // Perfect timing for the professional lens animation
+    }, 800); // Much faster loading
 
     return () => clearTimeout(timer);
   }, []);

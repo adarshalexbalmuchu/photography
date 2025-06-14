@@ -15,9 +15,8 @@ const Hero = () => {
     }
   };
 
-  // Update the hero background image to the new elephant image
-  const heroBackground = "/public/images/wildlife/1722037546362136.JPG";
-
+  // Use the new elephant wildlife image as hero background
+const heroBackground = "/images/hero-background.jpg";
   return (
     <section
       className="relative w-full h-screen flex items-center justify-center bg-cover bg-center"
