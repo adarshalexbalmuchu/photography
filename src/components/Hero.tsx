@@ -23,9 +23,9 @@ const heroBackground = `${import.meta.env.BASE_URL}images/hero-background.jpg`;
       style={{ backgroundImage: `url(${heroBackground})` }}
     >
       {/* Content */}
-      <div className="relative z-10 text-center max-w-5xl px-8">
+      <div className="relative z-10 text-center max-w-5xl px-4 sm:px-8">
         <h1 
-          className={`text-8xl md:text-9xl font-light mb-6 transition-all duration-1500 ${
+          className={`text-6xl sm:text-8xl md:text-9xl font-light mb-6 transition-all duration-1500 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
           } animate-text-reveal`}
           style={{ 
@@ -34,13 +34,13 @@ const heroBackground = `${import.meta.env.BASE_URL}images/hero-background.jpg`;
           }}
         >
           <span className="block text-white leading-none">CAPTURED</span>
-          <span className="block text-amber-400 text-6xl md:text-7xl font-light mt-2">
+          <span className="block text-amber-400 text-4xl sm:text-6xl md:text-7xl font-light mt-2">
             MOMENTS
           </span>
         </h1>
         
         <p 
-          className={`text-xl md:text-2xl font-light text-gray-200 mb-12 max-w-xl mx-auto leading-relaxed transition-all duration-1500 delay-500 ${
+          className={`text-lg sm:text-xl md:text-2xl font-light text-gray-200 mb-10 sm:mb-12 max-w-xs sm:max-w-xl mx-auto leading-relaxed transition-all duration-1500 delay-500 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
           } animate-text-reveal`}
           style={{ animationDelay: '0.8s' }}
@@ -50,7 +50,7 @@ const heroBackground = `${import.meta.env.BASE_URL}images/hero-background.jpg`;
 
         <button 
           onClick={scrollToGallery}
-          className={`group relative px-8 py-4 bg-transparent border border-white text-white hover:bg-white hover:text-black transition-all duration-500 tracking-widest font-light text-sm overflow-hidden btn-hover animate-button-glow ${
+          className={`group relative px-6 py-3 sm:px-8 sm:py-4 bg-transparent border border-white text-white hover:bg-white hover:text-black transition-all duration-500 tracking-widest font-light text-xs sm:text-sm overflow-hidden btn-hover animate-button-glow ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
           }`}
           style={{ 

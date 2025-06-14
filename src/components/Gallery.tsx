@@ -55,17 +55,18 @@ const Gallery: React.FC<GalleryProps> = ({ activeCategory }) => {
 
   if (isLoading && visibleImages.length === 0) { // Show full skeleton only on initial category load
     return (
-      <section className="py-20 bg-black min-h-screen" data-section="gallery">
+      <section className="py-12 sm:py-20 bg-black min-h-screen" data-section="gallery">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Adjusted grid for larger placeholders */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[...Array(INITIAL_LOAD_COUNT)].map((_, i) => (
               <div 
                 key={i} 
                 className={`bg-gray-800 animate-pulse rounded-lg ${
-                  i % 3 === 0 ? 'h-[500px]' : 
-                  i % 3 === 1 ? 'h-[400px]' : 
-                  'h-[450px]'
+                  // Mobile heights
+                  i % 3 === 0 ? 'h-[300px] sm:h-[500px]' : 
+                  i % 3 === 1 ? 'h-[250px] sm:h-[400px]' : 
+                  'h-[280px] sm:h-[450px]'
                 }`}
               ></div>
             ))}
@@ -106,8 +107,8 @@ const Gallery: React.FC<GalleryProps> = ({ activeCategory }) => {
             </div>
           ) : (
             !isLoading && ( // Only show "No images" if not loading and no images
-              <div className="text-center py-20">
-                <p className="text-gray-400 text-xl">No images found in this category.</p>
+              <div className="text-center py-16 sm:py-20">
+                <p className="text-gray-400 text-lg sm:text-xl">No images found in this category.</p>
               </div>
             )
           )}
