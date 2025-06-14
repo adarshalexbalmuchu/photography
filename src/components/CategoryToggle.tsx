@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface CategoryToggleProps {
@@ -8,17 +7,19 @@ interface CategoryToggleProps {
 
 const CategoryToggle: React.FC<CategoryToggleProps> = ({ activeCategory, onCategoryChange }) => {
   return (
-    <div className="flex justify-center mb-20">
-      <div className="relative bg-gray-900 rounded-full p-2 shadow-2xl">
-        <div 
-          className={`absolute top-2 h-12 bg-yellow-400 rounded-full transition-all duration-500 ease-out ${
-            activeCategory === 'wildlife' ? 'left-2 w-32' : 'left-36 w-32'
+    <div className="flex justify-center my-8 sm:my-12 md:my-16 lg:my-20">
+      <div className="relative bg-gray-900 rounded-full p-1 sm:p-2 shadow-2xl">
+        <div
+          className={`absolute top-1 sm:top-2 h-10 sm:h-12 bg-yellow-400 rounded-full transition-all duration-500 ease-out ${
+            activeCategory === 'wildlife'
+              ? 'left-1 sm:left-2 w-[calc(50%-0.25rem)] sm:w-[calc(50%-0.5rem)]' // Adjusted for padding
+              : 'left-[calc(50%+0.25rem)] sm:left-[calc(50%+0.5rem)] w-[calc(50%-0.25rem)] sm:w-[calc(50%-0.5rem)]' // Adjusted for padding
           }`}
         />
         
         <button
           onClick={() => onCategoryChange('wildlife')}
-          className={`relative z-10 px-8 py-3 rounded-full text-lg font-medium tracking-wide transition-colors duration-300 ${
+          className={`relative z-10 px-4 py-2 sm:px-6 md:px-8 sm:py-3 rounded-full text-sm sm:text-base md:text-lg font-medium tracking-wide transition-colors duration-300 w-1/2 ${
             activeCategory === 'wildlife' ? 'text-black' : 'text-white hover:text-yellow-400'
           }`}
           data-cursor="hover"
@@ -28,7 +29,7 @@ const CategoryToggle: React.FC<CategoryToggleProps> = ({ activeCategory, onCateg
         
         <button
           onClick={() => onCategoryChange('portraits')}
-          className={`relative z-10 px-8 py-3 rounded-full text-lg font-medium tracking-wide transition-colors duration-300 ${
+          className={`relative z-10 px-4 py-2 sm:px-6 md:px-8 sm:py-3 rounded-full text-sm sm:text-base md:text-lg font-medium tracking-wide transition-colors duration-300 w-1/2 ${
             activeCategory === 'portraits' ? 'text-black' : 'text-white hover:text-yellow-400'
           }`}
           data-cursor="hover"
